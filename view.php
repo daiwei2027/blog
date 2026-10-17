@@ -54,6 +54,7 @@
             } else {
                 echo "0 结果";
             }
+            echo "<a href='newBlog.php?category=" . $category . "'>新建博客</a>";
             ?>
         </div>
         <div id="nav">
