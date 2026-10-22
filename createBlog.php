@@ -16,6 +16,7 @@
 	</div>
 	<div id="right">
 		<?php
+		ini_set('display_errors', 'On');
 		$conn->query("SET NAMES UTF8");
 		date_default_timezone_set("Asia/Shanghai");
 
@@ -28,9 +29,10 @@
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 		
-	$sql = 'SELECT count(*) FROM blog WHERE category=' . $category;
+	$sql = 'SELECT count(*) FROM blog WHERE category=' . $_GET["category"];
             $result = $conn->query($sql);
             $row = $result->fetch_row();
+            $current = 1;
             $pages = 1;
             if ($row[0] == 0) {
                 $pages = 0;
@@ -42,7 +44,7 @@
             $current = $pages;
 
 		$conn->close();
-		header("Location: http://192.168.1.6/blog/view.php?category=" . $category . "&current=" . $current);
+		header("Location: http://192.168.1.6/blog/view.php?category=" . $_GET["category"]  . "&current=" . $current);
 		?>
 	</div>
 </body>

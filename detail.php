@@ -18,6 +18,7 @@
         </div>
         <div id="right">
             <?php
+            ini_set('display_errors', 'On');
             if (!$_GET["category"]) {
                 $sql = "SELECT * FROM category LIMIT 1;";
                 $result = $conn->query($sql);
@@ -25,6 +26,7 @@
             } else {
                 $category = $_GET["category"];
             }
+            $id = $_GET["id"];
 
             $sql = 'SELECT * FROM blog WHERE id=' . $id;
             $result = $conn->query($sql);
