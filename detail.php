@@ -18,19 +18,6 @@
         </div>
         <div id="right">
             <?php
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '@Passw0rd';
-            $dbname = 'blog';
-            $id = $_GET["id"];
-
-            // 创建连接
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die('连接失败: ' . $conn->connect_error);
-            }
-
             if (!$_GET["category"]) {
                 $sql = "SELECT * FROM category LIMIT 1;";
                 $result = $conn->query($sql);
@@ -71,17 +58,7 @@
             ?>
                     <div id="nav">
             <?php
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '@Passw0rd';
-            $dbname = 'blog';
             $id = $_GET["id"];
-            // 创建连接
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die('连接失败: ' . $conn->connect_error);
-            }
             if (!$_GET["category"]) {
                 $sql = "SELECT * FROM category LIMIT 1;";
                 $result = $conn->query($sql);
@@ -111,6 +88,7 @@
             } else {
                 echo "0 结果";
             }
+            $conn->close();
             ?>
         </div>
         </div>

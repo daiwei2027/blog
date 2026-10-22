@@ -17,17 +17,6 @@
 	<div id="right">
 		<?php
 		ini_set('display_errors', 'On');
-		$servername = "localhost";
-		$username = "root";
-		$password = "@Passw0rd";
-		$dbname = "blog";
-
-		// 创建连接
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// 检测连接
-		if ($conn->connect_error) {
-			die("连接失败: " . $conn->connect_error);
-		}
 
 		$conn->query("SET NAMES UTF8");
 		date_default_timezone_set("Asia/Shanghai");
@@ -42,6 +31,7 @@
 		}
 
 		$conn->close();
+		header("Location: http://192.168.1.6/blog/view.php?category=" . $_GET["category"] . "&current=" . $_GET["current"]);
 		?>
 	</div>
 </body>

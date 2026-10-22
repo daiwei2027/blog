@@ -28,16 +28,6 @@
             } else {
                 echo $_POST["name"];
                 ini_set('display_errors', 'On');
-                $servername = 'localhost';
-                $username = 'root';
-                $password = '@Passw0rd';
-                $dbname = 'blog';
-                // 创建连接
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                // Check connection
-                if ($conn->connect_error) {
-                    die('连接失败: ' . $conn->connect_error);
-                }
 
                 $sql = 'SELECT * FROM user WHERE name=' . $_POST["name"] . ' AND password=' . $_POST["password"];
                 $result = $conn->query($sql);

@@ -18,17 +18,6 @@
         <div id="right">
             <?php
             ini_set('display_errors', 'On');
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '@Passw0rd';
-            $dbname = 'blog';
-
-            // 创建连接
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die('连接失败: ' . $conn->connect_error);
-            }
 
             if (!$_GET["category"]) {
                 $sql = "SELECT * FROM category LIMIT 1;";
@@ -37,8 +26,10 @@
             } else {
                 $category = $_GET["category"];
             }
-
+		
+		$current = 1;
             if ($_GET["current"]) {
+            	$current = $_GET["current"];
                 $start = ($_GET["current"] - 1) * 10;
             } else {
                 $start = 0;
@@ -59,18 +50,6 @@
         </div>
         <div id="nav">
             <?php
-            // 创建连接
-            // Check connection
-            if ($conn->connect_error) {
-                die('连接失败: ' . $conn->connect_error);
-            }
-            if (!$_GET["category"]) {
-                $sql = "SELECT * FROM category LIMIT 1;";
-                $result = $conn->query($sql);
-                $category = $result->fetch_row()[0];
-            } else {
-                $category = $_GET["category"];
-            }
             $sql = 'SELECT count(*) FROM blog WHERE category=' . $category;
             $result = $conn->query($sql);
             $row = $result->fetch_row();
@@ -80,11 +59,6 @@
                 $pages = $row[0] / 10;
             } else {
                 $pages = (int) ($row[0] / 10 + 1);
-            }
-            if ($_GET["current"]) {
-                $current = $_GET["current"];
-            } else {
-                $current = 1;
             }
             if ($current > 1) {
                 echo "<a href='view.php?category=" . $category . "&current=" . $current - 1 . "'>&lt;preview</a>";

@@ -27,22 +27,13 @@
 		} else {
 			echo $_POST["name"];
 			ini_set('display_errors', 'On');
-			$servername = 'localhost';
-			$username = 'root';
-			$password = '@Passw0rd';
-			$dbname = 'blog';
-			// 创建连接
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			// Check connection
-			if ($conn->connect_error) {
-				die('连接失败: ' . $conn->connect_error);
-			}
 
 			$sql = 'SELECT * FROM user WHERE name=' . $_POST["name"];
 			$result = $conn->query($sql);
 			$row = $result->fetch_row();
 			if ($row) {
 				echo "用户名已存在";
+				$conn->close();
 				?>
 				<form action="register.php" method="post">
 					用户名：<input type="text" name="name"><br>
@@ -53,16 +44,6 @@
 				<?php
 			} else {
 				ini_set('display_errors', 'On');
-				$servername = 'localhost';
-				$username = 'root';
-				$password = '@Passw0rd';
-				$dbname = 'blog';
-				// 创建连接
-				$conn = new mysqli($servername, $username, $password, $dbname);
-				// Check connection
-				if ($conn->connect_error) {
-					die('连接失败: ' . $conn->connect_error);
-				}
 
 				$sql = "INSERT INTO user (name,password) VALUES ('" . $_POST["name"] . "','" . $_POST["password"] . "')";
 

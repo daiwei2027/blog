@@ -16,18 +16,6 @@
 	</div>
 	<div id="right">
 		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "@Passw0rd";
-		$dbname = "blog";
-
-		// 创建连接
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// 检测连接
-		if ($conn->connect_error) {
-			die("连接失败: " . $conn->connect_error);
-		}
-
 		$conn->query("SET NAMES UTF8");
 		date_default_timezone_set("Asia/Shanghai");
 
@@ -39,8 +27,22 @@
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
+		
+	$sql = 'SELECT count(*) FROM blog WHERE category=' . $category;
+            $result = $conn->query($sql);
+            $row = $result->fetch_row();
+            $pages = 1;
+            if ($row[0] == 0) {
+                $pages = 0;
+            } else if ($row[0] % 10 == 0) {
+                $pages = $row[0] / 10;
+            } else {
+                $pages = (int) ($row[0] / 10 + 1);
+            }
+            $current = $pages;
 
 		$conn->close();
+		header("Location: http://192.168.1.6/blog/view.php?category=" . $category . "&current=" . $current);
 		?>
 	</div>
 </body>
