@@ -1,0 +1,91 @@
+ubuntu26.10 qt启用kit，安装quick模块
+编辑->首选项->构建套件->Qt版本->手动设置->Qmake path->/usr/lib/qt6/bin/qmake6
+sudo apt install qt6-declarative-dev
+
+ubuntu26.10安装apache2,php,mysql
+sudo apt install apache2
+sudo apt install php
+sudo apt install mysql-server
+sudo apt install libapache2-mod-php
+sudo apt install php-mysql
+systemctl restart apache2
+
+matplotlib
+坐标轴中置
+import matplotlib.pyplot as plt
+ 
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [1, 2, 3])
+ 
+# 移动坐标轴到中心
+ax.spines['left'].set_position('center')
+ax.spines['bottom'].set_position('center')
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+ax.xaxis.set_ticks_position('bottom')
+ax.yaxis.set_ticks_position('left')
+ 
+plt.show()
+
+grid
+ax.grid(True)
+
+aspect
+ax.set_aspect(aspect=1)
+
+ubuntu26.10应用显示图标排列重置
+dconf reset -f /org/gnome/shell/
+
+PHP笔记
+显示错误
+ini_set('display_errors', 'On');
+
+获取新插入条目的id
+$conn->insert_id
+
+设置时区
+date_default_timezone_set("Asia/Shanghai");
+
+获取上一条记录
+$sql = 'SELECT * FROM blog WHERE category=' . $category . ' AND id < ' . $id . ' ORDER BY id DESC LIMIT 1';
+
+设置浏览器大小固定
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+判断浏览器类型（手机端还是电脑端）
+1，js
+navigator.userAgent
+
+2，php
+$_SERVER['HTTP_USER_AGENT']
+
+tomcat11 manager访问
+  <user username="daiwei" password="123456" roles="manager-gui"/>
+  <user username="robot" password="123456" roles="manager-script"/>
+  username不能为admin。
+  
+  ubuntu26.10分辨率太低解决办法
+  /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="video=1440x900"
+#GRUB_GFXMODE=640x480 可能有关
+sudo update-grub
+sudo reboot
+  
+  ubuntu26.10更改mysql密码
+  sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '@Passw0rd';
+
+python创建服务器
+python3 -m http.server 80
+
+ubuntu26.10 git
+1，密钥
+ssh-keygen -t ecdsa -b 256 -f /path/to/your/key
+
+git init
+git branch -m main
+git add .
+git commit -m "first"
+git remote add origin "git@github.com:daiwei2027/test.git"
+git push origin main
+  
