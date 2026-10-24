@@ -16,7 +16,7 @@
 	<div id="right">
 		<?php
 		if (!$_POST["name"] && !$_POST["password"]) {
-			?>
+		?>
 			<form action="register.php" method="post">
 				用户名：<input type="text" name="name"><br>
 				密码：<input type="password" name="password"><br>
@@ -34,14 +34,14 @@
 			if ($row) {
 				echo "用户名已存在";
 				$conn->close();
-				?>
+			?>
 				<form action="register.php" method="post">
 					用户名：<input type="text" name="name"><br>
 					密码：<input type="password" name="password"><br>
 					<input type="submit">
 					<input type="reset">
 				</form>
-				<?php
+		<?php
 			} else {
 				ini_set('display_errors', 'On');
 

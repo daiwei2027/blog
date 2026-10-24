@@ -22,6 +22,6 @@ if ($result->num_rows > 0) {
 	echo "0 结果";
 }
 echo "<a href='newCategory.php'>newCategory</a>";
-if($_SESSION['name']){
+if ($_SESSION['name']) {
 	echo "<p align='center'>" . $_SESSION['name'] . "</p>";
 }

@@ -21,7 +21,7 @@
 		$row = $result->fetch_row();
 		$conn->close();
 		?>
-		<form action="blogModify.php?id=<?php echo $_GET['id']; ?>&current=<?php echo $_GET["current"];?>" method="post">
+		<form action="blogModify.php?id=<?php echo $_GET['id']; ?>&current=<?php echo $_GET["current"]; ?>" method="post">
 			<input type="hidden" name="id" value="<?php echo $row[0]; ?>">
 			<input type="hidden" name="category" value="<?php echo $row[1]; ?>">
 			title:<input type="text" name="title" value="<?php echo $row[2]; ?>"><br>

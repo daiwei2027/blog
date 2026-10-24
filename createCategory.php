@@ -26,7 +26,7 @@
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
-	
+
 		$conn->close();
 		header("Location: http://192.168.1.6/blog/view.php");
 		?>
