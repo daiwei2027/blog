@@ -31,7 +31,7 @@
 		}
 
 		$conn->close();
-		header("Location: http://192.168.1.6/blog/view.php?category=" . $_GET["category"] . "&current=" . $_GET["current"]);
+		header("Location: http://192.168.1.6/blog/view.php?category=" . $_POST["category"] . "&current=" . $_GET["current"]);
 		?>
 	</div>
 </body>
