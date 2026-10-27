@@ -18,29 +18,20 @@
 		<form method="post" action="createBlog.php?category=<?php echo $_GET['category']; ?>">
 			title:<input type="text" name="title"><br>
 			content:<textarea id="content" name="content" cols="20" rows="10"></textarea><br>
-			<input type="button" onclick="addForm();" value="插入图片">
 			<input type="submit">
 			<input type="reset">
+		</form>
+		<form action="upload.php" method="post" enctype="multipart/form-data">
+		<input type="file" id="fileInput" name="image"><br>
+		<input id="submit" type="button" value="插入图片">
+		<input type="reset">
 		</form>
 <div id="progress"></div>
 <div id="response"></div>
 	</div>
 	<script>
-		function addForm() {
-			document.getElementById("right").innerHTML += "<form action='upload.php' method='post' enctype='multipart/form-data'><input type='file' id='fileInput' name='image'><br><input id='submit' type='submit'><input type='reset'></form>";
-			document.getElementById('fileInput').addEventListener('change', function(event) {
-				// 获取第一个选中的文件对象
-				const file = event.target.files;
-				console.log(file);
-				if (file) {
-					// 直接获取文件名（包含扩展名）
-					const fileName = file[0].name;
-					console.log(fileName);
-					// 可选：显示在页面上
-					document.getElementById('content').innerHTML = document.getElementById('content').innerHTML + "http://192.168.1.6/blog/images/" + fileName;
-				}
-			});
-			/*document.getElementById('submit').addEventListener('click', function(e) {
+
+			document.getElementById('submit').addEventListener('click', function(e) {
 				var input = document.getElementById('fileInput');
 				var files = input.files;
 				var formData = new FormData();
@@ -53,6 +44,10 @@
 					console.log(xhr.readyState + "1" + xhr.status + "2");
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						document.getElementById('response').innerHTML = xhr.responseText;
+						const fileName = files[0].name;
+					console.log(fileName);
+					// 可选：显示在页面上
+					document.getElementById('content').innerHTML = document.getElementById('content').innerHTML + "http://192.168.1.6/blog/images/" + fileName;
 					}
 				};
 				xhr.upload.onprogress = function(event) {
@@ -64,8 +59,7 @@
 				xhr.open('POST', 'upload.php', true);
 				xhr.send(formData);
 
-			});*/
-		}
+			});
 	</script>
 </body>
 
