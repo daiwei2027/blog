@@ -36,9 +36,9 @@
                 $_SESSION['name'] = $row[1];
                 $_SESSION['password'] = $row[2];
                 if ($_GET["blog"]) {
-                    header("Location: http://192.168.1.6/blog/detail.php?category=" . $_GET["category"] . "&id=" . $_GET["blog"]);
+                    header("Location: http://192.168.1.7/blog/detail.php?category=" . $_GET["category"] . "&id=" . $_GET["blog"]);
                 } else {
-                    header("Location: http://192.168.1.6/blog/newBlog.php?category=" . $_GET["category"]);
+                    header("Location: http://192.168.1.7/blog/newBlog.php?category=" . $_GET["category"]);
                 }
             } else {
                 echo "用户名或密码不正确";
