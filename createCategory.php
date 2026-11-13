@@ -28,7 +28,7 @@
 		}
 
 		$conn->close();
-		header("Location: http://192.168.1.6/blog/view.php");
+		header("Location: http://192.168.1.7/blog/view.php");
 		?>
 	</div>
 </body>
