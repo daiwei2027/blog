@@ -1,9 +1,6 @@
 <?php
 ini_set('display_errors', 'On');
-$servername = "localhost";
-$username = "root";
-$password = "@Passw0rd";
-$dbname = "blog";
+require "common.php";
 
 
 
@@ -30,7 +27,7 @@ $sql = "INSERT INTO comment (blog,content,date)  VALUES ('" . $_GET["blog"] . "'
 if ($conn->query($sql) === TRUE) {
 	echo $id = $conn->insert_id;
 	echo "新记录插入成功";
-	header("Location: http://192.168.1.7/blog/detail.php?category=" . $category . "&id=" . $_GET["blog"]);
+	header("Location:" . $domain . "blog/detail.php?category=" . $category . "&id=" . $_GET["blog"]);
 } else {
 	echo "Error: " . $sql . "<br>" . $conn->error;
 }
