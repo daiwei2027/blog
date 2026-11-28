@@ -11,7 +11,15 @@
 <body>
 	<div id="left">
 		<?php
-		require "common.php";
+        $root = dirname(__DIR__) . "\blog" . DIRECTORY_SEPARATOR;
+
+        define('MODEL_PATH', $root . 'model' . DIRECTORY_SEPARATOR);
+        define('FILES_PATH', $root . 'transaction_files' . DIRECTORY_SEPARATOR);
+        define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
+        require MODEL_PATH . "model.php";
+        foreach ($categories as $category) {
+            echo "<a href='view.php?category=" . $category["id"] . "'>" . $category["name"] . "</a><a href='categoryBefore.php?categoryid=" . $category["id"] . "'>修改分类</a>";
+        }
 		?>
 	</div>
 	<div id="right">

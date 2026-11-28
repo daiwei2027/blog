@@ -12,38 +12,21 @@
 <body>
     <div id="left">
         <?php
-        require "common.php";
+        $root = dirname(__DIR__) . "\blog" . DIRECTORY_SEPARATOR;
+
+        define('MODEL_PATH', $root . 'model' . DIRECTORY_SEPARATOR);
+        define('FILES_PATH', $root . 'transaction_files' . DIRECTORY_SEPARATOR);
+        define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
+        require MODEL_PATH . "model.php";
+        foreach ($categories as $category) {
+            echo "<a href='view.php?category=" . $category["id"] . "'>" . $category["name"] . "</a><a href='categoryBefore.php?categoryid=" . $category["id"] . "'>修改分类</a>";
+        }
         ?>
     </div>
     <div id="right">
         <?php
-        ini_set('display_errors', 'On');
-
-        if (!$_GET["category"]) {
-            $sql = "SELECT * FROM category LIMIT 1;";
-            $result = $conn->query($sql);
-            $category = $result->fetch_row()[0];
-        } else {
-            $category = $_GET["category"];
-        }
-
-        $current = 1;
-        if ($_GET["current"]) {
-            $current = $_GET["current"];
-            $start = ($_GET["current"] - 1) * 10;
-        } else {
-            $start = 0;
-        }
-
-        $sql = 'SELECT * FROM blog WHERE category=' . $category . ' LIMIT ' . $start . ', 10';
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // 输出数据
-            while ($row = $result->fetch_assoc()) {
-                echo "<a href='detail.php?category=" . $category . "&id=" . $row["id"] . "'>" . $row["title"] . "</a><br>";
-            }
-        } else {
-            echo "0 结果";
+        foreach ($blogs as $blog) {
+            echo "<a href='detail.php?category=" . $category . "&id=" . $blog["id"] . "'>" . $blog["title"] . "</a><br>";
         }
         echo "<a href='newBlog.php?category=" . $category . "'>新建博客</a>";
         ?>
@@ -59,10 +42,6 @@
             $pages = $row[0] / 10;
         } else {
             $pages = (int) ($row[0] / 10 + 1);
-        }
-        $current = 1;
-        if ($_GET["current"]) {
-            $current = $_GET["current"];
         }
         if ($current > 1) {
             echo "<a href='view.php?category=" . $category . "&current=" . $current - 1 . "'>&lt;preview</a>";

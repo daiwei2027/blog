@@ -13,27 +13,21 @@
 <body>
     <div id="left">
         <?php
-        require "common.php";
+        $root = dirname(__DIR__) . "\blog" . DIRECTORY_SEPARATOR;
+
+        define('MODEL_PATH', $root . 'model' . DIRECTORY_SEPARATOR);
+        define('FILES_PATH', $root . 'transaction_files' . DIRECTORY_SEPARATOR);
+        define('VIEWS_PATH', $root . 'views' . DIRECTORY_SEPARATOR);
+        require MODEL_PATH . "model.php";
+        foreach ($categories as $category) {
+            echo "<a href='view.php?category=" . $category["id"] . "'>" . $category["name"] . "</a><a href='categoryBefore.php?categoryid=" . $category["id"] . "'>修改分类</a>";
+        }
         ?>
     </div>
     <div id="right">
         <?php
-        ini_set('display_errors', 'On');
-        if (!$_GET["category"]) {
-            $sql = "SELECT * FROM category LIMIT 1;";
-            $result = $conn->query($sql);
-            $category = $result->fetch_row()[0];
-        } else {
-            $category = $_GET["category"];
-        }
-        $id = $_GET["id"];
-
-        $sql = 'SELECT * FROM blog WHERE id=' . $id;
-        $result = $conn->query($sql);
-        $row = $result->fetch_row();
-        // 输出数据
-        $id = $row[1];
-        echo "<p>$row[2]</p><p>$row[3]</p><p>$row[4]</p><a href=blogBefore.php?id=" . $row[0] . ">modify</a><a href=delete.php?id=" . $row[0] . ">delete</a><br>";
+        $category = $blog[1];
+        echo "<p>" . $blog[2] . "</p><p>" . $blog[3] . "</p><p>" . $blog[4] . "</p><a href=blogBefore.php?id=" . $blog[0] . ">modify</a><a href=delete.php?id=" . $blog[0] . ">delete</a><br>";
 
         $sql = 'SELECT * FROM comment WHERE blog=' . $row[1];
         $result = $conn->query($sql);
